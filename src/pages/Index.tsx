@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Shield, TrendingUp, Sparkles, Target, Brain, Leaf } from "lucide-react";
 import heroImage from "@/assets/hero-investment.jpg";
+import Header from "@/components/Header";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -32,8 +33,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         <div
           className="absolute inset-0 opacity-30"
           style={{

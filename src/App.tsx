@@ -8,6 +8,8 @@ import RiskProfile from "./pages/RiskProfile";
 import Preferences from "./pages/Preferences";
 import Products from "./pages/Products";
 import Chat from "./pages/Chat";
+import Auth from "./pages/Auth";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +26,8 @@ const App = () => (
           <Route path="/preferences" element={<Preferences />} />
           <Route path="/products" element={<Products />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/profile" element={<Profile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

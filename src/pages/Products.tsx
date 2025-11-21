@@ -1,13 +1,26 @@
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, MessageSquare, TrendingUp, Leaf, Heart, Building2, Zap } from "lucide-react";
+import Header from "@/components/Header";
+import { supabase } from "@/integrations/supabase/client";
 
 const Products = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const profile = location.state?.profile || {};
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/auth");
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const products = [
     {
@@ -61,8 +74,10 @@ const Products = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="pt-24 px-4 pb-12">
+        <div className="max-w-6xl mx-auto">
         <Button variant="ghost" onClick={() => navigate("/preferences")} className="mb-8">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Retour
@@ -151,6 +166,7 @@ const Products = () => {
             Parler à mon conseiller IA
           </Button>
         </Card>
+        </div>
       </div>
     </div>
   );

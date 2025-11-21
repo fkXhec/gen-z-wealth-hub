@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, ArrowRight, Heart, TrendingUp, Leaf } from "lucide-react";
+import Header from "@/components/Header";
+import { supabase } from "@/integrations/supabase/client";
 
 const Preferences = () => {
   const navigate = useNavigate();
@@ -12,6 +14,16 @@ const Preferences = () => {
   const [themes, setThemes] = useState<string[]>([]);
   const [productTypes, setProductTypes] = useState<string[]>([]);
   const [liquidity, setLiquidity] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/auth");
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const motivations = [
     { id: "impact", label: "Impact", icon: Leaf, desc: "Améliorer le monde avec mes investissements" },
@@ -43,8 +55,10 @@ const Preferences = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="pt-24 px-4 pb-12">
+        <div className="max-w-5xl mx-auto">
         <Button variant="ghost" onClick={() => navigate("/risk-profile")} className="mb-8">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Retour
@@ -162,6 +176,7 @@ const Preferences = () => {
             Voir mes recommandations
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
+        </div>
         </div>
       </div>
     </div>

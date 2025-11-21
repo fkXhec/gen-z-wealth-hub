@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Send, Bot, User } from "lucide-react";
+import { Bot, User, Send } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Header from "@/components/Header";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Message {
   role: "user" | "assistant";
@@ -19,6 +21,16 @@ const Chat = () => {
     }
   ]);
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/auth");
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -39,12 +51,10 @@ const Chat = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto h-screen flex flex-col">
+      <Header />
+      <div className="max-w-4xl mx-auto h-screen flex flex-col pt-16">
         <div className="p-4 border-b border-border bg-card/50 backdrop-blur">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => navigate("/products")}>
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-accent/10">
                 <Bot className="h-6 w-6 text-accent" />
