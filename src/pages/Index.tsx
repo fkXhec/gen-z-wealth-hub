@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Shield, TrendingUp, Sparkles, Target, Brain, Leaf } from "lucide-react";
+import { ArrowRight, Shield, TrendingUp, Target, Brain, Leaf } from "lucide-react";
 import heroImage from "@/assets/hero-investment.jpg";
+import logoBnp from "@/assets/logo-bnp.png";
 import Header from "@/components/Header";
 
 const Index = () => {
@@ -15,7 +16,7 @@ const Index = () => {
       description: "Un parcours intelligent qui comprend votre profil de risque et vos préférences"
     },
     {
-      icon: Sparkles,
+      icon: Brain,
       title: "Produits Innovants",
       description: "ETF, crypto, immobilier, royalties musicales et bien plus"
     },
@@ -48,7 +49,7 @@ const Index = () => {
         
         <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-6 py-2 mb-8">
-            <Sparkles className="h-4 w-4 text-accent" />
+            <img src={logoBnp} alt="BNP Paribas" className="h-4 w-4" />
             <span className="text-sm text-accent font-medium">Plateforme Premium pour Jeunes Investisseurs</span>
           </div>
           
