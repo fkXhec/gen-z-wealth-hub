@@ -99,6 +99,9 @@ const Header = () => {
               <Button variant="ghost" onClick={() => navigate("/products")}>
                 Products
               </Button>
+              <Button variant="ghost" onClick={() => navigate("/social")}>
+                Social
+              </Button>
               <Button variant="ghost" onClick={() => navigate("/chat")}>
                 AI Advisor
               </Button>
