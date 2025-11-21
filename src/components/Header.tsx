@@ -12,8 +12,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
-import { LogOut, User as UserIcon, Sparkles } from "lucide-react";
+import { LogOut, User as UserIcon } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import logoBnp from "@/assets/logo-bnp.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-          <Sparkles className="h-6 w-6 text-accent" />
+          <img src={logoBnp} alt="BNP Paribas" className="h-6 w-6" />
           <span className="text-xl font-bold bg-gradient-accent bg-clip-text text-transparent">
             BNP Paribas Private Banking
           </span>
