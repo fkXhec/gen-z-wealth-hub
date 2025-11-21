@@ -243,7 +243,7 @@ const Social = () => {
 
       {/* Confirmation Dialog */}
       <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-2xl">
               <CheckCircle2 className="h-6 w-6 text-accent" />
@@ -255,7 +255,7 @@ const Social = () => {
           </DialogHeader>
 
           {selectedFriend && (
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
                 <Avatar className="h-12 w-12">
                   <AvatarImage src={selectedFriend.avatar} alt={selectedFriend.name} />
@@ -297,7 +297,7 @@ const Social = () => {
 
               <div>
                 <h4 className="font-semibold mb-3">Investments to be added:</h4>
-                <div className="space-y-2 max-h-60 overflow-y-auto">
+                <div className="space-y-2 max-h-48 overflow-y-auto">
                   {selectedFriend.investments.map((inv) => (
                     <div
                       key={inv.id}
@@ -320,7 +320,7 @@ const Social = () => {
             </div>
           )}
 
-          <DialogFooter>
+          <DialogFooter className="mt-4">
             <Button variant="outline" onClick={() => setShowConfirmDialog(false)}>
               Cancel
             </Button>
