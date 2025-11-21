@@ -31,7 +31,9 @@ const Header = () => {
     });
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
         setTimeout(() => {
@@ -46,12 +48,8 @@ const Header = () => {
   }, []);
 
   const fetchProfile = async (userId: string) => {
-    const { data } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .maybeSingle();
-    
+    const { data } = await supabase.from("profiles").select("*").eq("id", userId).maybeSingle();
+
     if (data) {
       setProfile(data);
     }
@@ -63,12 +61,12 @@ const Header = () => {
       toast({
         title: "Erreur",
         description: "Impossible de se déconnecter",
-        variant: "destructive"
+        variant: "destructive",
       });
     } else {
       toast({
         title: "Déconnexion réussie",
-        description: "À bientôt !"
+        description: "À bientôt !",
       });
       navigate("/");
     }
@@ -84,35 +82,23 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <div 
-          className="flex items-center gap-2 cursor-pointer"
-          onClick={() => navigate("/")}
-        >
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
           <Sparkles className="h-6 w-6 text-accent" />
           <span className="text-xl font-bold bg-gradient-accent bg-clip-text text-transparent">
-            WealthVision
+            BNP Paribas Private Banking
           </span>
         </div>
 
         <nav className="flex items-center gap-6">
           {user ? (
             <>
-              <Button
-                variant="ghost"
-                onClick={() => navigate("/risk-profile")}
-              >
+              <Button variant="ghost" onClick={() => navigate("/risk-profile")}>
                 Mon Parcours
               </Button>
-              <Button
-                variant="ghost"
-                onClick={() => navigate("/products")}
-              >
+              <Button variant="ghost" onClick={() => navigate("/products")}>
                 Produits
               </Button>
-              <Button
-                variant="ghost"
-                onClick={() => navigate("/chat")}
-              >
+              <Button variant="ghost" onClick={() => navigate("/chat")}>
                 Conseiller IA
               </Button>
 
@@ -121,9 +107,7 @@ const Header = () => {
                   <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                     <Avatar>
                       <AvatarImage src={profile?.avatar_url} alt={profile?.first_name || "User"} />
-                      <AvatarFallback className="bg-accent/10 text-accent">
-                        {getInitials()}
-                      </AvatarFallback>
+                      <AvatarFallback className="bg-accent/10 text-accent">{getInitials()}</AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
@@ -152,10 +136,7 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Button
-                variant="ghost"
-                onClick={() => navigate("/auth")}
-              >
+              <Button variant="ghost" onClick={() => navigate("/auth")}>
                 Connexion
               </Button>
               <Button
