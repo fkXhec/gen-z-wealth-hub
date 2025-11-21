@@ -104,7 +104,7 @@ const Index = () => {
       <section className="py-24 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Une expérience unique</h2>
+            <h2 className="text-4xl font-bold mb-4">Une expérience qui vous ressemble vraiment</h2>
             <p className="text-xl text-muted-foreground">
               Tout ce dont vous avez besoin pour investir intelligemment
             </p>
