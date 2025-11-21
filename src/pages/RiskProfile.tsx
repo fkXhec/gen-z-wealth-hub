@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import calmBoat from "@/assets/calm-boat.jpg";
 import dynamicBoat from "@/assets/dynamic-boat.jpg";
+import Header from "@/components/Header";
+import { supabase } from "@/integrations/supabase/client";
 
 interface RiskProfileData {
   risk_motion_preference?: "calm" | "dynamic";
@@ -17,6 +19,16 @@ const RiskProfile = () => {
   const [step, setStep] = useState(1);
   const [profile, setProfile] = useState<RiskProfileData>({});
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/auth");
+      }
+    };
+    checkAuth();
+  }, [navigate]);
+
   const handleSelect = (field: keyof RiskProfileData, value: string) => {
     setProfile({ ...profile, [field]: value });
     if (step < 3) {
@@ -27,8 +39,10 @@ const RiskProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="pt-24 px-4 pb-12">
+        <div className="max-w-4xl mx-auto">
         <Button
           variant="ghost"
           onClick={() => step === 1 ? navigate("/") : setStep(step - 1)}
@@ -153,6 +167,7 @@ const RiskProfile = () => {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
