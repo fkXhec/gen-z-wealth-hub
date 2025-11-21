@@ -12,9 +12,9 @@ import Header from "@/components/Header";
 import { z } from "zod";
 
 const profileSchema = z.object({
-  firstName: z.string().trim().min(1, "Le prénom est requis").max(50, "Prénom trop long"),
-  lastName: z.string().trim().min(1, "Le nom est requis").max(50, "Nom trop long"),
-  avatarUrl: z.string().url("URL invalide").optional().or(z.literal("")),
+  firstName: z.string().trim().min(1, "First name is required").max(50, "First name too long"),
+  lastName: z.string().trim().min(1, "Last name is required").max(50, "Last name too long"),
+  avatarUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
 });
 
 const Profile = () => {
@@ -106,14 +106,14 @@ const Profile = () => {
 
     if (error) {
       toast({
-        title: "Erreur",
-        description: "Impossible de mettre à jour le profil",
+        title: "Error",
+        description: "Unable to update profile",
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Profil mis à jour",
-        description: "Vos informations ont été enregistrées",
+        title: "Profile updated",
+        description: "Your information has been saved",
       });
       checkAuth();
     }
@@ -130,7 +130,7 @@ const Profile = () => {
         <div className="max-w-2xl mx-auto">
           <Button variant="ghost" onClick={() => navigate("/")} className="mb-8">
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Retour
+            Back
           </Button>
 
           <Card className="p-8 border-border bg-card">
@@ -142,15 +142,15 @@ const Profile = () => {
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="text-3xl font-bold mb-2">Mon Profil</h1>
-                <p className="text-muted-foreground">Gérez vos informations personnelles</p>
+                <h1 className="text-3xl font-bold mb-2">My Profile</h1>
+                <p className="text-muted-foreground">Manage your personal information</p>
               </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="firstName">Prénom</Label>
+                  <Label htmlFor="firstName">First Name</Label>
                   <Input
                     id="firstName"
                     name="firstName"
@@ -165,7 +165,7 @@ const Profile = () => {
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="lastName">Nom</Label>
+                  <Label htmlFor="lastName">Last Name</Label>
                   <Input
                     id="lastName"
                     name="lastName"
@@ -182,12 +182,12 @@ const Profile = () => {
               </div>
 
               <div>
-                <Label htmlFor="avatarUrl">URL de l'avatar</Label>
+                <Label htmlFor="avatarUrl">Avatar URL</Label>
                 <Input
                   id="avatarUrl"
                   name="avatarUrl"
                   type="url"
-                  placeholder="https://exemple.com/avatar.jpg"
+                  placeholder="https://example.com/avatar.jpg"
                   value={formData.avatarUrl}
                   onChange={handleChange}
                   className={errors.avatarUrl ? "border-destructive" : ""}
@@ -197,7 +197,7 @@ const Profile = () => {
                   <p className="text-sm text-destructive mt-1">{errors.avatarUrl}</p>
                 )}
                 <p className="text-xs text-muted-foreground mt-1">
-                  Lien vers votre photo de profil
+                  Link to your profile picture
                 </p>
               </div>
 
@@ -207,7 +207,7 @@ const Profile = () => {
                 disabled={loading}
               >
                 <Save className="mr-2 h-4 w-4" />
-                {loading ? "Enregistrement..." : "Enregistrer les modifications"}
+                {loading ? "Saving..." : "Save changes"}
               </Button>
             </form>
           </Card>

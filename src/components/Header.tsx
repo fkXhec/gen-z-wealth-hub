@@ -60,14 +60,14 @@ const Header = () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       toast({
-        title: "Erreur",
-        description: "Impossible de se déconnecter",
+        title: "Error",
+        description: "Unable to log out",
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Déconnexion réussie",
-        description: "À bientôt !",
+        title: "Logout successful",
+        description: "See you soon!",
       });
       navigate("/");
     }
@@ -94,13 +94,13 @@ const Header = () => {
           {user ? (
             <>
               <Button variant="ghost" onClick={() => navigate("/risk-profile")}>
-                Mon Parcours
+                My Journey
               </Button>
               <Button variant="ghost" onClick={() => navigate("/products")}>
-                Produits
+                Products
               </Button>
               <Button variant="ghost" onClick={() => navigate("/chat")}>
-                Conseiller IA
+                AI Advisor
               </Button>
 
               <DropdownMenu>
@@ -118,7 +118,7 @@ const Header = () => {
                       <p className="text-sm font-medium">
                         {profile?.first_name && profile?.last_name
                           ? `${profile.first_name} ${profile.last_name}`
-                          : "Mon compte"}
+                          : "My account"}
                       </p>
                       <p className="text-xs text-muted-foreground">{user.email}</p>
                     </div>
@@ -126,11 +126,11 @@ const Header = () => {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => navigate("/profile")}>
                     <UserIcon className="mr-2 h-4 w-4" />
-                    Mon Profil
+                    My Profile
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />
-                    Déconnexion
+                    Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -138,13 +138,13 @@ const Header = () => {
           ) : (
             <>
               <Button variant="ghost" onClick={() => navigate("/auth")}>
-                Connexion
+                Login
               </Button>
               <Button
                 onClick={() => navigate("/auth?mode=signup")}
                 className="bg-accent text-accent-foreground hover:bg-accent/90"
               >
-                S'inscrire
+                Sign up
               </Button>
             </>
           )}

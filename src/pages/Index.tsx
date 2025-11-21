@@ -12,23 +12,23 @@ const Index = () => {
   const features = [
     {
       icon: Target,
-      title: "Profil Personnalisé",
-      description: "Un parcours intelligent qui comprend votre profil de risque et vos préférences"
+      title: "Personalized Profile",
+      description: "An intelligent journey that understands your risk profile and preferences"
     },
     {
       icon: Brain,
-      title: "Produits Innovants",
-      description: "ETF, crypto, immobilier, royalties musicales et bien plus"
+      title: "Innovative Products",
+      description: "ETFs, crypto, real estate, music royalties and much more"
     },
     {
       icon: Brain,
-      title: "Conseiller IA",
-      description: "Un chatbot intelligent qui répond à toutes vos questions d'investissement"
+      title: "AI Advisor",
+      description: "An intelligent chatbot that answers all your investment questions"
     },
     {
       icon: Leaf,
       title: "Impact & Passion",
-      description: "Investissez selon vos valeurs et vos centres d'intérêt"
+      description: "Invest according to your values and interests"
     }
   ];
 
@@ -50,19 +50,19 @@ const Index = () => {
         <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-6 py-2 mb-8">
             <img src={logoBnp} alt="BNP Paribas" className="h-4 w-4" />
-            <span className="text-sm text-accent font-medium">Plateforme Premium pour Jeunes Investisseurs</span>
+            <span className="text-sm text-accent font-medium">Premium Platform for Young Investors</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Investissez selon
+            Invest According to
             <span className="block bg-gradient-accent bg-clip-text text-transparent">
-              Vos Valeurs
+              Your Values
             </span>
           </h1>
           
           <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Une expérience d'investissement moderne qui allie performance, impact et passion. 
-            Guidé par l'intelligence artificielle.
+            A modern investment experience that combines performance, impact and passion. 
+            Guided by artificial intelligence.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -71,7 +71,7 @@ const Index = () => {
               onClick={() => navigate("/risk-profile")}
               className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-glow text-lg px-8"
             >
-              Commencer mon parcours
+              Start my journey
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button
@@ -80,22 +80,22 @@ const Index = () => {
               onClick={() => navigate("/chat")}
               className="border-accent/30 hover:bg-accent/10 text-lg px-8"
             >
-              Parler au conseiller IA
+              Talk to AI advisor
             </Button>
           </div>
 
           <div className="mt-16 grid grid-cols-3 gap-8 max-w-3xl mx-auto">
             <div className="text-center">
               <div className="text-4xl font-bold text-accent mb-2">50+</div>
-              <div className="text-sm text-muted-foreground">Produits d'investissement</div>
+              <div className="text-sm text-muted-foreground">Investment products</div>
             </div>
             <div className="text-center border-x border-border">
               <div className="text-4xl font-bold text-accent mb-2">24/7</div>
-              <div className="text-sm text-muted-foreground">Conseiller IA disponible</div>
+              <div className="text-sm text-muted-foreground">AI advisor available</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-accent mb-2">100%</div>
-              <div className="text-sm text-muted-foreground">Personnalisé</div>
+              <div className="text-sm text-muted-foreground">Personalized</div>
             </div>
           </div>
         </div>
@@ -105,9 +105,9 @@ const Index = () => {
       <section className="py-24 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Une expérience qui vous ressemble vraiment</h2>
+            <h2 className="text-4xl font-bold mb-4">An experience that truly reflects you</h2>
             <p className="text-xl text-muted-foreground">
-              Tout ce dont vous avez besoin pour investir intelligemment
+              Everything you need to invest smartly
             </p>
           </div>
 
@@ -132,17 +132,17 @@ const Index = () => {
       <section className="py-24 px-4">
         <Card className="max-w-4xl mx-auto p-12 text-center border-border bg-gradient-card shadow-elegant">
           <Shield className="h-16 w-16 mx-auto mb-6 text-accent" />
-          <h2 className="text-3xl font-bold mb-4">Prêt à commencer ?</h2>
+          <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
           <p className="text-muted-foreground mb-8 text-lg max-w-2xl mx-auto">
-            Créez votre profil en 3 minutes et découvrez des opportunités d'investissement 
-            parfaitement adaptées à vos objectifs.
+            Create your profile in 3 minutes and discover investment opportunities 
+            perfectly suited to your goals.
           </p>
           <Button
             size="lg"
             onClick={() => navigate("/risk-profile")}
             className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-glow text-lg px-8"
           >
-            Démarrer maintenant
+            Start now
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </Card>

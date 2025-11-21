@@ -47,14 +47,14 @@ const FloatingAIMenu = () => {
         if (resp.status === 429) {
           toast({
             variant: "destructive",
-            title: "Limite atteinte",
-            description: "Trop de requêtes, veuillez réessayer plus tard.",
+            title: "Limit reached",
+            description: "Too many requests, please try again later.",
           });
         } else if (resp.status === 402) {
           toast({
             variant: "destructive",
-            title: "Crédits insuffisants",
-            description: "Veuillez ajouter des crédits à votre compte.",
+            title: "Insufficient credits",
+            description: "Please add credits to your account.",
           });
         }
         throw new Error("Failed to start stream");
@@ -108,8 +108,8 @@ const FloatingAIMenu = () => {
       console.error("Chat error:", error);
       toast({
         variant: "destructive",
-        title: "Erreur",
-        description: "Une erreur est survenue lors de la communication avec le conseiller.",
+        title: "Error",
+        description: "An error occurred while communicating with the advisor.",
       });
     }
   };
@@ -155,8 +155,8 @@ const FloatingAIMenu = () => {
       if (!resp.ok) {
         toast({
           variant: "destructive",
-          title: "Erreur",
-          description: "Impossible de générer la plaque visuelle.",
+          title: "Error",
+          description: "Unable to generate visual summary.",
         });
         return;
       }
@@ -168,22 +168,22 @@ const FloatingAIMenu = () => {
           ...prev,
           {
             role: "assistant",
-            content: "Voici votre plaque récapitulative personnalisée :",
+            content: "Here is your personalized summary card:",
             image: data.image
           }
         ]);
         
         toast({
-          title: "Plaque générée",
-          description: "Votre synthèse visuelle est prête !",
+          title: "Card generated",
+          description: "Your visual summary is ready!",
         });
       }
     } catch (error) {
       console.error("Visual generation error:", error);
       toast({
         variant: "destructive",
-        title: "Erreur",
-        description: "Une erreur est survenue lors de la génération.",
+        title: "Error",
+        description: "An error occurred during generation.",
       });
     } finally {
       setIsGeneratingImage(false);
@@ -210,8 +210,8 @@ const FloatingAIMenu = () => {
                 <MessageSquare className="h-5 w-5 text-accent-foreground" />
               </div>
               <div>
-                <h3 className="font-bold text-accent-foreground">Conseiller IA</h3>
-                <p className="text-xs text-accent-foreground/80">Toujours là pour vous aider</p>
+                <h3 className="font-bold text-accent-foreground">AI Advisor</h3>
+                <p className="text-xs text-accent-foreground/80">Always here to help</p>
               </div>
             </div>
           </div>
@@ -221,7 +221,7 @@ const FloatingAIMenu = () => {
             {messages.length === 0 && (
               <div className="text-center text-muted-foreground text-sm py-8">
                 <MessageSquare className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                <p>Posez-moi vos questions sur vos investissements !</p>
+                <p>Ask me your investment questions!</p>
                 {profile.risk_motion_preference && (
                   <Button
                     onClick={generateVisual}
@@ -232,12 +232,12 @@ const FloatingAIMenu = () => {
                     {isGeneratingImage ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Génération...
+                        Generating...
                       </>
                     ) : (
                       <>
                         <Image className="mr-2 h-4 w-4" />
-                        Générer ma plaque récapitulative
+                        Generate my summary card
                       </>
                     )}
                   </Button>
@@ -261,7 +261,7 @@ const FloatingAIMenu = () => {
                     {msg.image && (
                       <img 
                         src={msg.image} 
-                        alt="Plaque récapitulative" 
+                        alt="Summary card" 
                         className="mt-2 rounded-lg w-full"
                       />
                     )}
@@ -291,12 +291,12 @@ const FloatingAIMenu = () => {
                 {isGeneratingImage ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Génération...
+                    Generating...
                   </>
                 ) : (
                   <>
                     <Image className="mr-2 h-4 w-4" />
-                    Générer ma plaque récapitulative
+                    Generate my summary card
                   </>
                 )}
               </Button>
@@ -306,7 +306,7 @@ const FloatingAIMenu = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Posez votre question..."
+                placeholder="Ask your question..."
                 className="resize-none min-h-[60px]"
                 disabled={isLoading}
               />

@@ -30,13 +30,13 @@ const Products = () => {
   const allProducts = [
     {
       id: 1,
-      name: "ETF Énergie Propre",
+      name: "Clean Energy ETF",
       category: "ETF",
       risk: 3,
       return: "8-12%",
       icon: Leaf,
       impact: true,
-      description: "Portefeuille diversifié d'énergies renouvelables",
+      description: "Diversified portfolio of renewable energies",
       invested: true,
       currentValue: 12350,
       performance: 8.5
@@ -48,27 +48,27 @@ const Products = () => {
       risk: 5,
       return: "15-25%",
       icon: Zap,
-      description: "Startups IA et technologies émergentes"
+      description: "AI startups and emerging technologies"
     },
     {
       id: 3,
-      name: "Royalties Musicales",
+      name: "Music Royalties",
       category: "Alternative",
       risk: 2,
       return: "6-10%",
       icon: Heart,
       passion: true,
-      description: "Droits sur catalogues musicaux établis"
+      description: "Rights on established music catalogs"
     },
     {
       id: 4,
-      name: "Infrastructure Verte",
+      name: "Green Infrastructure",
       category: "Private Equity",
       risk: 3,
       return: "10-14%",
       icon: Building2,
       impact: true,
-      description: "Parcs solaires et projets durables",
+      description: "Solar parks and sustainable projects",
       invested: true,
       currentValue: 8700,
       performance: -2.3
@@ -80,25 +80,25 @@ const Products = () => {
       risk: 6,
       return: "Variable",
       icon: TrendingUp,
-      description: "Infrastructure blockchain principale"
+      description: "Main blockchain infrastructure"
     },
     {
       id: 6,
-      name: "Immobilier Résidentiel",
-      category: "Immobilier",
+      name: "Residential Real Estate",
+      category: "Real Estate",
       risk: 2,
       return: "5-8%",
       icon: Building2,
-      description: "SCPI de logements diversifiés"
+      description: "Diversified residential REIT"
     },
     {
       id: 7,
-      name: "Actions Dividendes",
-      category: "Actions",
+      name: "Dividend Stocks",
+      category: "Stocks",
       risk: 3,
       return: "7-11%",
       icon: TrendingUp,
-      description: "Grandes entreprises versant des dividendes réguliers"
+      description: "Large companies paying regular dividends"
     }
   ];
 
@@ -138,8 +138,8 @@ const Products = () => {
 
   const handleInvest = (productId: number) => {
     toast({
-      title: "Fonctionnalité en développement",
-      description: "L'investissement sera bientôt disponible !",
+      title: "Feature in development",
+      description: "Investment will be available soon!",
     });
   };
 
@@ -150,28 +150,28 @@ const Products = () => {
         <div className="max-w-6xl mx-auto">
         <Button variant="ghost" onClick={() => navigate("/preferences")} className="mb-8">
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Retour
+          Back
         </Button>
 
         <div className="mb-12">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-accent bg-clip-text text-transparent">
-            Produits Recommandés
+            Recommended Products
           </h1>
-          <p className="text-muted-foreground">Sélection personnalisée basée sur votre profil</p>
+          <p className="text-muted-foreground">Personalized selection based on your profile</p>
         </div>
 
         {/* Profile Summary */}
         <Card className="p-6 mb-8 border-border bg-card">
-          <h2 className="text-xl font-semibold mb-4">Votre profil</h2>
+          <h2 className="text-xl font-semibold mb-4">Your profile</h2>
           <div className="flex flex-wrap gap-3">
             {profile.motivation && (
               <Badge variant="outline">Motivation: {profile.motivation}</Badge>
             )}
             {profile.liquidity && (
-              <Badge variant="outline">Liquidité: {profile.liquidity}</Badge>
+              <Badge variant="outline">Liquidity: {profile.liquidity}</Badge>
             )}
             {profile.productTypes?.length > 0 && (
-              <Badge variant="outline">{profile.productTypes.length} types de produits</Badge>
+              <Badge variant="outline">{profile.productTypes.length} product types</Badge>
             )}
           </div>
         </Card>
@@ -180,7 +180,7 @@ const Products = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-semibold">
-              {showAllProducts ? "Tous les produits" : "Recommandés pour vous"}
+              {showAllProducts ? "All products" : "Recommended for you"}
             </h2>
             <Button
               variant="outline"
@@ -189,7 +189,7 @@ const Products = () => {
               className="gap-2"
             >
               <Plus className="h-4 w-4" />
-              {showAllProducts ? "Voir les recommandations" : "Voir tous les produits"}
+              {showAllProducts ? "View recommendations" : "View all products"}
             </Button>
           </div>
           
