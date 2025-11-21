@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
-import { MessageSquare, X, Send, Loader2 } from "lucide-react";
+import { MessageSquare, X, Send, Loader2, Image } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  image?: string;
 }
 
 const FloatingAIMenu = () => {
@@ -16,8 +18,11 @@ const FloatingAIMenu = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const location = useLocation();
+  const profile = location.state?.profile || {};
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -128,6 +133,63 @@ const FloatingAIMenu = () => {
     }
   };
 
+  const generateVisual = async () => {
+    if (isGeneratingImage) return;
+    
+    setIsGeneratingImage(true);
+    const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-advisor`;
+
+    try {
+      const resp = await fetch(CHAT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({ 
+          action: "generate_visual",
+          profile: profile
+        }),
+      });
+
+      if (!resp.ok) {
+        toast({
+          variant: "destructive",
+          title: "Erreur",
+          description: "Impossible de générer la plaque visuelle.",
+        });
+        return;
+      }
+
+      const data = await resp.json();
+      
+      if (data.image) {
+        setMessages(prev => [
+          ...prev,
+          {
+            role: "assistant",
+            content: "Voici votre plaque récapitulative personnalisée :",
+            image: data.image
+          }
+        ]);
+        
+        toast({
+          title: "Plaque générée",
+          description: "Votre synthèse visuelle est prête !",
+        });
+      }
+    } catch (error) {
+      console.error("Visual generation error:", error);
+      toast({
+        variant: "destructive",
+        title: "Erreur",
+        description: "Une erreur est survenue lors de la génération.",
+      });
+    } finally {
+      setIsGeneratingImage(false);
+    }
+  };
+
   return (
     <>
       {/* Floating Button */}
@@ -160,6 +222,26 @@ const FloatingAIMenu = () => {
               <div className="text-center text-muted-foreground text-sm py-8">
                 <MessageSquare className="h-12 w-12 mx-auto mb-3 opacity-50" />
                 <p>Posez-moi vos questions sur vos investissements !</p>
+                {profile.risk_motion_preference && (
+                  <Button
+                    onClick={generateVisual}
+                    disabled={isGeneratingImage}
+                    className="mt-4 bg-accent text-accent-foreground hover:bg-accent/90"
+                    size="sm"
+                  >
+                    {isGeneratingImage ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Génération...
+                      </>
+                    ) : (
+                      <>
+                        <Image className="mr-2 h-4 w-4" />
+                        Générer ma plaque récapitulative
+                      </>
+                    )}
+                  </Button>
+                )}
               </div>
             )}
             <div className="space-y-4">
@@ -176,6 +258,13 @@ const FloatingAIMenu = () => {
                     }`}
                   >
                     <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                    {msg.image && (
+                      <img 
+                        src={msg.image} 
+                        alt="Plaque récapitulative" 
+                        className="mt-2 rounded-lg w-full"
+                      />
+                    )}
                   </div>
                 </div>
               ))}
@@ -191,6 +280,27 @@ const FloatingAIMenu = () => {
 
           {/* Input */}
           <div className="p-4 border-t border-border">
+            {profile.risk_motion_preference && messages.length > 0 && (
+              <Button
+                onClick={generateVisual}
+                disabled={isGeneratingImage}
+                variant="outline"
+                className="w-full mb-2"
+                size="sm"
+              >
+                {isGeneratingImage ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Génération...
+                  </>
+                ) : (
+                  <>
+                    <Image className="mr-2 h-4 w-4" />
+                    Générer ma plaque récapitulative
+                  </>
+                )}
+              </Button>
+            )}
             <div className="flex gap-2">
               <Textarea
                 value={input}
