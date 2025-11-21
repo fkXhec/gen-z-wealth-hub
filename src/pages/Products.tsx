@@ -1,16 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, MessageSquare, TrendingUp, Leaf, Heart, Building2, Zap } from "lucide-react";
+import { ArrowLeft, TrendingUp, Leaf, Heart, Building2, Zap, Plus } from "lucide-react";
 import Header from "@/components/Header";
+import ProductCard from "@/components/ProductCard";
+import FloatingAIMenu from "@/components/FloatingAIMenu";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Products = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const profile = location.state?.profile || {};
+  const [showAllProducts, setShowAllProducts] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -22,7 +27,7 @@ const Products = () => {
     checkAuth();
   }, [navigate]);
 
-  const products = [
+  const allProducts = [
     {
       id: 1,
       name: "ETF Énergie Propre",
@@ -31,7 +36,10 @@ const Products = () => {
       return: "8-12%",
       icon: Leaf,
       impact: true,
-      description: "Portefeuille diversifié d'énergies renouvelables"
+      description: "Portefeuille diversifié d'énergies renouvelables",
+      invested: true,
+      currentValue: 12350,
+      performance: 8.5
     },
     {
       id: 2,
@@ -60,7 +68,10 @@ const Products = () => {
       return: "10-14%",
       icon: Building2,
       impact: true,
-      description: "Parcs solaires et projets durables"
+      description: "Parcs solaires et projets durables",
+      invested: true,
+      currentValue: 8700,
+      performance: -2.3
     },
     {
       id: 5,
@@ -70,8 +81,67 @@ const Products = () => {
       return: "Variable",
       icon: TrendingUp,
       description: "Infrastructure blockchain principale"
+    },
+    {
+      id: 6,
+      name: "Immobilier Résidentiel",
+      category: "Immobilier",
+      risk: 2,
+      return: "5-8%",
+      icon: Building2,
+      description: "SCPI de logements diversifiés"
+    },
+    {
+      id: 7,
+      name: "Actions Dividendes",
+      category: "Actions",
+      risk: 3,
+      return: "7-11%",
+      icon: TrendingUp,
+      description: "Grandes entreprises versant des dividendes réguliers"
     }
   ];
+
+  // Recommandation intelligente basée sur le profil
+  const getRecommendedProducts = () => {
+    let recommended = [...allProducts];
+    
+    // Filtrer par profil de risque
+    const riskProfile = profile.risk_motion_preference;
+    if (riskProfile === "calm") {
+      recommended = recommended.filter(p => p.risk <= 3);
+    } else if (riskProfile === "dynamic") {
+      recommended = recommended.filter(p => p.risk >= 3);
+    }
+    
+    // Filtrer par motivation
+    if (profile.motivation === "impact") {
+      recommended.sort((a, b) => (b.impact ? 1 : 0) - (a.impact ? 1 : 0));
+    } else if (profile.motivation === "passion") {
+      recommended.sort((a, b) => (b.passion ? 1 : 0) - (a.passion ? 1 : 0));
+    }
+    
+    // Filtrer par types de produits
+    if (profile.productTypes?.length > 0) {
+      recommended = recommended.filter(p => 
+        profile.productTypes.some((type: string) => 
+          p.category.toLowerCase().includes(type.toLowerCase()) ||
+          type.toLowerCase().includes(p.category.toLowerCase())
+        )
+      );
+    }
+    
+    return recommended.slice(0, 5);
+  };
+
+  const recommendedProducts = showAllProducts ? allProducts : getRecommendedProducts();
+
+  const handleInvest = (productId: number) => {
+    toast({
+      title: "Fonctionnalité en développement",
+      description: "L'investissement sera bientôt disponible !",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -106,68 +176,40 @@ const Products = () => {
           </div>
         </Card>
 
-        {/* Products Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {products.map((product) => (
-            <Card key={product.id} className="p-6 border-border bg-card hover:shadow-glow transition-all">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-accent/10">
-                    <product.icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">{product.name}</h3>
-                    <p className="text-sm text-muted-foreground">{product.category}</p>
-                  </div>
-                </div>
-                <Badge variant="secondary">Risque {product.risk}/6</Badge>
-              </div>
-
-              <p className="text-muted-foreground mb-4">{product.description}</p>
-
-              <div className="flex items-center justify-between">
-                <div className="flex gap-2">
-                  {product.impact && (
-                    <Badge variant="outline" className="text-green-500 border-green-500">
-                      Impact
-                    </Badge>
-                  )}
-                  {product.passion && (
-                    <Badge variant="outline" className="text-pink-500 border-pink-500">
-                      Passion
-                    </Badge>
-                  )}
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-muted-foreground">Rendement estimé</p>
-                  <p className="font-semibold text-accent">{product.return}</p>
-                </div>
-              </div>
-
-              <Button className="w-full mt-4 bg-accent text-accent-foreground hover:bg-accent/90">
-                En savoir plus
-              </Button>
-            </Card>
-          ))}
+        {/* Products Horizontal Scroll */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-semibold">
+              {showAllProducts ? "Tous les produits" : "Recommandés pour vous"}
+            </h2>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowAllProducts(!showAllProducts)}
+              className="gap-2"
+            >
+              <Plus className="h-4 w-4" />
+              {showAllProducts ? "Voir les recommandations" : "Voir tous les produits"}
+            </Button>
+          </div>
+          
+          <div className="relative">
+            <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+              {recommendedProducts.map((product) => (
+                <ProductCard 
+                  key={product.id} 
+                  product={product}
+                  onInvest={handleInvest}
+                />
+              ))}
+            </div>
+          </div>
         </div>
-
-        {/* CTA to Chat */}
-        <Card className="p-8 text-center border-border bg-gradient-card">
-          <MessageSquare className="h-12 w-12 mx-auto mb-4 text-accent" />
-          <h2 className="text-2xl font-semibold mb-3">Besoin de conseils personnalisés ?</h2>
-          <p className="text-muted-foreground mb-6">
-            Discutez avec votre conseiller IA pour affiner votre stratégie
-          </p>
-          <Button
-            size="lg"
-            onClick={() => navigate("/chat")}
-            className="bg-accent text-accent-foreground hover:bg-accent/90"
-          >
-            Parler à mon conseiller IA
-          </Button>
-        </Card>
         </div>
       </div>
+      
+      {/* Floating AI Menu */}
+      <FloatingAIMenu />
     </div>
   );
 };

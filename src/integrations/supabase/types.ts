@@ -41,6 +41,42 @@ export type Database = {
         }
         Relationships: []
       }
+      user_investments: {
+        Row: {
+          amount: number | null
+          created_at: string
+          current_value: number | null
+          id: string
+          invested_at: string
+          product_id: string
+          return_percentage: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string
+          current_value?: number | null
+          id?: string
+          invested_at?: string
+          product_id: string
+          return_percentage?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string
+          current_value?: number | null
+          id?: string
+          invested_at?: string
+          product_id?: string
+          return_percentage?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
