@@ -51,14 +51,14 @@ const RiskProfile = () => {
           className="mb-8"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Retour
+          Back
         </Button>
 
         <div className="mb-12 text-center">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-accent bg-clip-text text-transparent">
-            Profil de Risque
+            Risk Profile
           </h1>
-          <p className="text-muted-foreground">Question {step} sur 3</p>
+          <p className="text-muted-foreground">Question {step} of 3</p>
           <div className="mt-6 flex gap-2 justify-center">
             {[1, 2, 3].map((i) => (
               <div
@@ -74,9 +74,9 @@ const RiskProfile = () => {
         {step === 1 && (
           <div className="space-y-6 animate-in fade-in duration-500">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-semibold mb-3">Votre rapport au mouvement</h2>
+              <h2 className="text-2xl font-semibold mb-3">Your relationship with movement</h2>
               <p className="text-muted-foreground">
-                Comment vous sentez-vous face aux variations de marché ?
+                How do you feel about market fluctuations?
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
@@ -85,10 +85,10 @@ const RiskProfile = () => {
                 onClick={() => handleSelect("risk_motion_preference", "calm")}
               >
                 <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                <img src={calmBoat} alt="Bateau stable" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
-                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Bateau Stable</h3>
+                <img src={calmBoat} alt="Stable boat" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Stable Boat</h3>
                 <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                  Je préfère la stabilité et éviter les grandes variations
+                  I prefer stability and avoiding large fluctuations
                 </p>
               </Card>
               <Card
@@ -96,10 +96,10 @@ const RiskProfile = () => {
                 onClick={() => handleSelect("risk_motion_preference", "dynamic")}
               >
                 <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                <img src={dynamicBoat} alt="Voilier rapide" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
-                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Voilier Rapide</h3>
+                <img src={dynamicBoat} alt="Fast sailboat" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Fast Sailboat</h3>
                 <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                  J'accepte les vagues pour une croissance plus forte
+                  I accept waves for stronger growth
                 </p>
               </Card>
             </div>
@@ -109,9 +109,9 @@ const RiskProfile = () => {
         {step === 2 && (
           <div className="space-y-6 animate-in fade-in duration-500">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-semibold mb-3">Votre intention profonde</h2>
+              <h2 className="text-2xl font-semibold mb-3">Your deep intention</h2>
               <p className="text-muted-foreground">
-                Que souhaitez-vous accomplir avec vos investissements ?
+                What do you want to achieve with your investments?
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
@@ -120,10 +120,10 @@ const RiskProfile = () => {
                 onClick={() => handleSelect("risk_intention", "consolidate")}
               >
                 <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                <img src={intentionCompass} alt="Consolider" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
-                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Consolider</h3>
+                <img src={intentionCompass} alt="Consolidate" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Consolidate</h3>
                 <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                  Renforcer ce que j'ai, sécuriser et diversifier progressivement
+                  Strengthen what I have, secure and diversify gradually
                 </p>
               </Card>
               <Card
@@ -131,10 +131,10 @@ const RiskProfile = () => {
                 onClick={() => handleSelect("risk_intention", "grow")}
               >
                 <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                <img src={intentionCompass} alt="Croître" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
-                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Croître</h3>
+                <img src={intentionCompass} alt="Grow" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Grow</h3>
                 <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                  Explorer de nouvelles opportunités et maximiser ma croissance
+                  Explore new opportunities and maximize my growth
                 </p>
               </Card>
             </div>
@@ -144,9 +144,9 @@ const RiskProfile = () => {
         {step === 3 && (
           <div className="space-y-6 animate-in fade-in duration-500">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-semibold mb-3">Votre situation réelle</h2>
+              <h2 className="text-2xl font-semibold mb-3">Your real situation</h2>
               <p className="text-muted-foreground">
-                Quelle est la nature de cet argent pour vous ?
+                What is the nature of this money for you?
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
@@ -155,10 +155,10 @@ const RiskProfile = () => {
                 onClick={() => handleSelect("risk_capacity", "vital")}
               >
                 <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                <img src={situationAnchor} alt="Argent Vital" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
-                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Argent Vital</h3>
+                <img src={situationAnchor} alt="Vital Money" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Vital Money</h3>
                 <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                  J'en ai besoin à court terme, doit rester accessible
+                  I need it in the short term, must remain accessible
                 </p>
               </Card>
               <Card
@@ -166,10 +166,10 @@ const RiskProfile = () => {
                 onClick={() => handleSelect("risk_capacity", "long_term")}
               >
                 <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                <img src={situationAnchor} alt="Long Terme" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
-                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Long Terme</h3>
+                <img src={situationAnchor} alt="Long Term" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Long Term</h3>
                 <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
-                  Je peux investir sur plusieurs années sans y toucher
+                  I can invest for several years without touching it
                 </p>
               </Card>
             </div>

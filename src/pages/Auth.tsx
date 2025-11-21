@@ -10,15 +10,15 @@ import { ArrowLeft, Sparkles } from "lucide-react";
 import { z } from "zod";
 
 const signupSchema = z.object({
-  email: z.string().email("Email invalide").max(255, "Email trop long"),
-  password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères").max(100, "Mot de passe trop long"),
-  firstName: z.string().trim().min(1, "Le prénom est requis").max(50, "Prénom trop long"),
-  lastName: z.string().trim().min(1, "Le nom est requis").max(50, "Nom trop long"),
+  email: z.string().email("Invalid email").max(255, "Email too long"),
+  password: z.string().min(6, "Password must be at least 6 characters").max(100, "Password too long"),
+  firstName: z.string().trim().min(1, "First name is required").max(50, "First name too long"),
+  lastName: z.string().trim().min(1, "Last name is required").max(50, "Last name too long"),
 });
 
 const loginSchema = z.object({
-  email: z.string().email("Email invalide").max(255, "Email trop long"),
-  password: z.string().min(1, "Le mot de passe est requis").max(100, "Mot de passe trop long"),
+  email: z.string().email("Invalid email").max(255, "Email too long"),
+  password: z.string().min(1, "Password is required").max(100, "Password too long"),
 });
 
 const Auth = () => {
@@ -106,21 +106,21 @@ const Auth = () => {
     if (error) {
       if (error.message.includes("already registered")) {
         toast({
-          title: "Compte existant",
-          description: "Cet email est déjà utilisé. Connectez-vous.",
+          title: "Existing account",
+          description: "This email is already in use. Please log in.",
           variant: "destructive",
         });
       } else {
         toast({
-          title: "Erreur d'inscription",
+          title: "Signup error",
           description: error.message,
           variant: "destructive",
         });
       }
     } else {
       toast({
-        title: "Inscription réussie !",
-        description: "Bienvenue sur WealthVision",
+        title: "Signup successful!",
+        description: "Welcome to WealthVision",
       });
       navigate("/");
     }
@@ -141,21 +141,21 @@ const Auth = () => {
     if (error) {
       if (error.message.includes("Invalid login credentials")) {
         toast({
-          title: "Erreur de connexion",
-          description: "Email ou mot de passe incorrect",
+          title: "Login error",
+          description: "Incorrect email or password",
           variant: "destructive",
         });
       } else {
         toast({
-          title: "Erreur de connexion",
+          title: "Login error",
           description: error.message,
           variant: "destructive",
         });
       }
     } else {
       toast({
-        title: "Connexion réussie",
-        description: "Heureux de vous revoir !",
+        title: "Login successful",
+        description: "Happy to see you back!",
       });
       navigate("/");
     }
@@ -179,7 +179,7 @@ const Auth = () => {
           className="mb-8"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Retour
+          Back
         </Button>
 
         <Card className="p-8 border-border bg-card shadow-elegant">
@@ -190,12 +190,12 @@ const Auth = () => {
               </div>
             </div>
             <h1 className="text-3xl font-bold mb-2">
-              {mode === "signup" ? "Créer un compte" : "Connexion"}
+              {mode === "signup" ? "Create an account" : "Login"}
             </h1>
             <p className="text-muted-foreground">
               {mode === "signup"
-                ? "Rejoignez WealthVision aujourd'hui"
-                : "Accédez à votre espace personnel"}
+                ? "Join WealthVision today"
+                : "Access your personal space"}
             </p>
           </div>
 
@@ -204,7 +204,7 @@ const Auth = () => {
               <>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="firstName">Prénom</Label>
+                    <Label htmlFor="firstName">First Name</Label>
                     <Input
                       id="firstName"
                       name="firstName"
@@ -219,7 +219,7 @@ const Auth = () => {
                     )}
                   </div>
                   <div>
-                    <Label htmlFor="lastName">Nom</Label>
+                    <Label htmlFor="lastName">Last Name</Label>
                     <Input
                       id="lastName"
                       name="lastName"
@@ -254,7 +254,7 @@ const Auth = () => {
             </div>
 
             <div>
-              <Label htmlFor="password">Mot de passe</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 name="password"
@@ -274,7 +274,7 @@ const Auth = () => {
               className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
               disabled={loading}
             >
-              {loading ? "Chargement..." : mode === "signup" ? "S'inscrire" : "Se connecter"}
+              {loading ? "Loading..." : mode === "signup" ? "Sign up" : "Log in"}
             </Button>
           </form>
 
@@ -287,8 +287,8 @@ const Auth = () => {
               className="text-sm text-muted-foreground hover:text-accent transition-colors"
             >
               {mode === "login"
-                ? "Pas encore de compte ? S'inscrire"
-                : "Déjà un compte ? Se connecter"}
+                ? "No account yet? Sign up"
+                : "Already have an account? Log in"}
             </button>
           </div>
         </Card>
