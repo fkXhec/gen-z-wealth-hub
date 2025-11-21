@@ -5,7 +5,8 @@ import { Card } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import calmBoat from "@/assets/calm-boat.jpg";
 import dynamicBoat from "@/assets/dynamic-boat.jpg";
-import intentionCompass from "@/assets/intention-compass.jpg";
+import consolidateVault from "@/assets/consolidate-vault.jpg";
+import growthTrajectory from "@/assets/growth-trajectory.jpg";
 import situationAnchor from "@/assets/situation-anchor.jpg";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
@@ -120,7 +121,7 @@ const RiskProfile = () => {
                 onClick={() => handleSelect("risk_intention", "consolidate")}
               >
                 <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                <img src={intentionCompass} alt="Consolider" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
+                <img src={consolidateVault} alt="Consolider" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
                 <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Consolider</h3>
                 <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   Renforcer ce que j'ai, sécuriser et diversifier progressivement
@@ -131,7 +132,7 @@ const RiskProfile = () => {
                 onClick={() => handleSelect("risk_intention", "grow")}
               >
                 <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                <img src={intentionCompass} alt="Croître" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
+                <img src={growthTrajectory} alt="Croître" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
                 <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Croître</h3>
                 <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   Explorer de nouvelles opportunités et maximiser ma croissance
