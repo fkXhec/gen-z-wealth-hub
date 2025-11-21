@@ -5,6 +5,8 @@ import { Card } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import calmBoat from "@/assets/calm-boat.jpg";
 import dynamicBoat from "@/assets/dynamic-boat.jpg";
+import intentionCompass from "@/assets/intention-compass.jpg";
+import situationAnchor from "@/assets/situation-anchor.jpg";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -79,22 +81,24 @@ const RiskProfile = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <Card
-                className="p-8 cursor-pointer hover:shadow-glow transition-all hover:scale-105 border-border bg-card"
+                className="group p-8 cursor-pointer hover:shadow-glow transition-all duration-500 hover:scale-105 hover:border-accent border-2 border-border bg-card hover:bg-card/80 overflow-hidden relative"
                 onClick={() => handleSelect("risk_motion_preference", "calm")}
               >
-                <img src={calmBoat} alt="Bateau stable" className="w-full h-48 object-cover rounded-lg mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Bateau Stable</h3>
-                <p className="text-muted-foreground">
+                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                <img src={calmBoat} alt="Bateau stable" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Bateau Stable</h3>
+                <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   Je préfère la stabilité et éviter les grandes variations
                 </p>
               </Card>
               <Card
-                className="p-8 cursor-pointer hover:shadow-glow transition-all hover:scale-105 border-border bg-card"
+                className="group p-8 cursor-pointer hover:shadow-glow transition-all duration-500 hover:scale-105 hover:border-accent border-2 border-border bg-card hover:bg-card/80 overflow-hidden relative"
                 onClick={() => handleSelect("risk_motion_preference", "dynamic")}
               >
-                <img src={dynamicBoat} alt="Voilier rapide" className="w-full h-48 object-cover rounded-lg mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Voilier Rapide</h3>
-                <p className="text-muted-foreground">
+                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                <img src={dynamicBoat} alt="Voilier rapide" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Voilier Rapide</h3>
+                <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   J'accepte les vagues pour une croissance plus forte
                 </p>
               </Card>
@@ -112,22 +116,24 @@ const RiskProfile = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <Card
-                className="p-8 cursor-pointer hover:shadow-glow transition-all hover:scale-105 border-border bg-card"
+                className="group p-8 cursor-pointer hover:shadow-glow transition-all duration-500 hover:scale-105 hover:border-accent border-2 border-border bg-card hover:bg-card/80 overflow-hidden relative"
                 onClick={() => handleSelect("risk_intention", "consolidate")}
               >
-                <div className="text-5xl mb-4">🏛️</div>
-                <h3 className="text-xl font-semibold mb-2">Consolider</h3>
-                <p className="text-muted-foreground">
+                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                <img src={intentionCompass} alt="Consolider" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Consolider</h3>
+                <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   Renforcer ce que j'ai, sécuriser et diversifier progressivement
                 </p>
               </Card>
               <Card
-                className="p-8 cursor-pointer hover:shadow-glow transition-all hover:scale-105 border-border bg-card"
+                className="group p-8 cursor-pointer hover:shadow-glow transition-all duration-500 hover:scale-105 hover:border-accent border-2 border-border bg-card hover:bg-card/80 overflow-hidden relative"
                 onClick={() => handleSelect("risk_intention", "grow")}
               >
-                <div className="text-5xl mb-4">🚀</div>
-                <h3 className="text-xl font-semibold mb-2">Croître</h3>
-                <p className="text-muted-foreground">
+                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                <img src={intentionCompass} alt="Croître" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Croître</h3>
+                <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   Explorer de nouvelles opportunités et maximiser ma croissance
                 </p>
               </Card>
@@ -145,22 +151,24 @@ const RiskProfile = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <Card
-                className="p-8 cursor-pointer hover:shadow-glow transition-all hover:scale-105 border-border bg-card"
+                className="group p-8 cursor-pointer hover:shadow-glow transition-all duration-500 hover:scale-105 hover:border-accent border-2 border-border bg-card hover:bg-card/80 overflow-hidden relative"
                 onClick={() => handleSelect("risk_capacity", "vital")}
               >
-                <div className="text-5xl mb-4">🔐</div>
-                <h3 className="text-xl font-semibold mb-2">Argent Vital</h3>
-                <p className="text-muted-foreground">
+                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                <img src={situationAnchor} alt="Argent Vital" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Argent Vital</h3>
+                <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   J'en ai besoin à court terme, doit rester accessible
                 </p>
               </Card>
               <Card
-                className="p-8 cursor-pointer hover:shadow-glow transition-all hover:scale-105 border-border bg-card"
+                className="group p-8 cursor-pointer hover:shadow-glow transition-all duration-500 hover:scale-105 hover:border-accent border-2 border-border bg-card hover:bg-card/80 overflow-hidden relative"
                 onClick={() => handleSelect("risk_capacity", "long_term")}
               >
-                <div className="text-5xl mb-4">⏳</div>
-                <h3 className="text-xl font-semibold mb-2">Long Terme</h3>
-                <p className="text-muted-foreground">
+                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                <img src={situationAnchor} alt="Long Terme" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-500 group-hover:scale-110" />
+                <h3 className="text-xl font-semibold mb-2 transition-colors duration-300 group-hover:text-accent">Long Terme</h3>
+                <p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   Je peux investir sur plusieurs années sans y toucher
                 </p>
               </Card>
